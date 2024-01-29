@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 18px;
+        }
+        .header a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding: 20px;
+        }
+        .item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        .item img {
+            max-width: 100px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+        .item .info {
+            flex-grow: 1;
+        }
+        .item .info h3 {
+            margin: 0;
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #333;
+        }
+        .item .info p {
+            margin: 0;
+            color: #666;
+        }
+        .item .buttons {
+            display: flex;
+            align-items: center;
+        }
+        .item .buttons button {
+            margin-right: 10px;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 3px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .item .buttons button:hover {
+            background-color: #45a049;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+        .modal-content input[type="text"],
+        .modal-content textarea,
+        .modal-content select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .modal-content input[type="file"] {
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+        .modal-content button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .modal-content button:hover {
+            background-color: #555;
+        }
+        .modal-content label {
+            font-weight: bold;
+        }
+        .modal-content h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        /* test */
+        #addItemModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+#addItemForm {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#addItemForm input[type="text"],
+#addItemForm textarea,
+#addItemForm select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+#addItemForm input[type="file"] {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+#addItemForm button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+#addItemForm button:hover {
+    background-color: #555;
+}
+#addItemForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+#addItemForm label input[type="checkbox"] {
+    margin-right: 5px;
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <a href="#">Category</a>
+            <a href="#">Food</a>
+        </div>
+        <!-- You can add additional elements or functionalities here -->
+    </div>
+    <div class="container">
+        <!-- Start Add item buuton -->
+        <button class="addbutton" onclick="openAddItemModal()">Add Item</button>
+        <div id="addItemModal">
+            <form id="addItemForm">
+                <input type="text" placeholder="Title">
+                <textarea placeholder="Description"></textarea>
+                <input type="file" accept="image/*">
+                <input type="text" placeholder="Price">
+                <label><input type="checkbox"> Option 1</label><br>
+                <label><input type="checkbox"> Option 2</label><br>
+                <label><input type="checkbox"> Option 3</label><br>
+                <select>
+                    <option value="value1">Value 1</option>
+                    <option value="value2">Value 2</option>
+                    <option value="value3">Value 3</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <!-- End Add item buuton -->
+        <div class="item">
+            <img src="example.jpg" alt="Example Image">
+            <div class="info">
+                <h3>Title</h3>
+                <p>Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Price: $10.99</p>
+            </div>
+            <div class="buttons">
+                <button onclick="openUpdateItemModal()">Update</button>
+                <button onclick="deleteItem()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Item Modal -->
+    <div class="modal-overlay" id="updateItemModal">
+        <div class="modal-content">
+            <h2>Update Item</h2>
+            <form onsubmit="return validateForm()">
+                <label for="updateTitleInput">Title:</label>
+                <input type="text" id="updateTitleInput" placeholder="Title">
+                <label for="updateDescriptionInput">Description:</label>
+                <textarea id="updateDescriptionInput" placeholder="Description"></textarea>
+                <label for="updateImageInput">Insert Image:</label>
+                <input type="file" id="updateImageInput" accept="image/*">
+                <label for="updatePriceInput">Price:</label>
+                <input type="text" id="updatePriceInput" placeholder="Price">
+                <label>Options:</label>
+                <label><input type="checkbox"> Option 1</label>
+                <label><input type="checkbox"> Option 2</label>
+                <label><input type="checkbox"> Option 3</label>
+                <label for="updateSelectMenu">List Menu:</label>
+                <select id="updateSelectMenu">
+                    <option value="value1">Value 1</option>
+                    <option value="value2">Value 2</option>
+                    <option value="value3">Value 3</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openUpdateItemModal() {
+            document.getElementById('updateItemModal').style.display = 'flex';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById('updateItemModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function deleteItem() {
+            // Add your delete logic here
+            console.log("Delete button clicked");
+        }
+
+        function validateForm() {
+            var title = document.getElementById('updateTitleInput').value;
+            var description = document.getElementById('updateDescriptionInput').value;
+            var price = document.getElementById('updatePriceInput').value;
+
+            if (title.trim() == '' || description.trim() == '' || price.trim() == '') {
+                alert("Please fill in all fields.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

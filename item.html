@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div>
+        <a href="category.html">Category</a>
+        <a href="item.html">Food</a>
+      </div>
+      <!-- You can add additional elements or functionalities here -->
+    </div>
+    <div class="container">
+      <!-- Start Add item buuton -->
+      <button class="addbutton" onclick="openAddItemModal()">Add Item</button>
+      <div id="addItemModal">
+        <form id="addItemForm">
+          <input type="text" placeholder="Title" />
+          <textarea placeholder="Description"></textarea>
+          <input type="file" accept="image/*" />
+          <input type="text" placeholder="Price" />
+          <label><input type="checkbox" /> Breakfast</label><br />
+          <label><input type="checkbox" /> Main Menu</label><br />
+          <label><input type="checkbox" /> Seyami</label><br />
+          <select>
+            <option value="value1">Oriental Breakfast</option>
+            <option value="value2">Omelet</option>
+            <option value="value3">Crepe Roll</option>
+          </select>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <!-- End Add item buuton -->
+      <!-- Start items -->
+      <div class="item">
+        <img src="example.jpg" alt="Example Image" />
+        <div class="info">
+          <h3>Title</h3>
+          <p>
+            Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
+          <p>Price: 10.99 LE</p>
+          <p>Category : Breakfast</p>
+          <p>Sub Category : arabic breakfast</p>
+        </div>
+        <div class="buttons">
+          <!-- start update button -->
+          <button class="updatebutton" onclick="openUpdateModal()">
+            Update
+          </button>
+          <div id="updateModal">
+            <form id="updateForm">
+              <input type="text" placeholder="Title" />
+              <textarea placeholder="Description">Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea>
+              <input type="file" accept="image/*" />
+              <input type="text" placeholder="10.99" />
+              <label><input type="checkbox" /> Breakfast</label><br />
+              <label><input type="checkbox" /> Main Menu </label><br />
+              <label><input type="checkbox" /> Seyami</label><br />
+              <select>
+                <option value="value1">Oriental Breakfast</option>
+                <option value="value2">Omelet</option>
+                <option value="value3">Crepe Roll</option>
+              </select>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+          <!-- end update button -->
+          <button class="deletebutton" onclick="deleteItem()">Delete</button>
+        </div>
+      </div>
+    </div>
+    <!-- End items -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
